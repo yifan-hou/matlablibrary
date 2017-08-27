@@ -6,10 +6,12 @@
 % Based on
 % 	https://math.stackexchange.com/questions/180418/calculate-rotation-matrix-to-align-vector-a-to-vector-b-in-3d
 function m = matBTVec(a,b)
+a = a/norm(a);
+b = b/norm(b);
 crossAB = cross(a,b);
 if norm(crossAB) < 1e-8
 	% singularity, a and b are parallel
-	if a'b > 0
+	if a'*b > 0
 		m = eye(3);
 	else
 	 	m = -eye(3);

@@ -13,10 +13,18 @@ if nargin == 1
 		a1 = a1(2:4,:);
 	end
 	theta = normByCol(a1);
-	n = bsxfun(@rdivide, a1, theta);
-elseif nargin == 1
+    id_singular = find(theta > 1e-7);
+    n = a1*0;
+    if ~isempty(id_singular)
+        n(:,id_singular) = bsxfun(@rdivide, a1(:,id_singular), theta(id_singular));
+    end
+elseif nargin == 3
 	theta = norm([a1 a3 a3]);
-	n = [a1 a2 a3]'/theta;
+    if theta < 1e-7
+        n = [0 0 0]';
+    else
+        n = [a1 a2 a3]'/theta;
+    end
 end
 	
 q = [cos(theta); bsxfun(@times, sin(theta), n)];
