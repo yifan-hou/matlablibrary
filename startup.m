@@ -4,7 +4,6 @@ set(0,'defaultTextFontWeight', 'Normal')
 warning('off','MATLAB:nargchk:deprecated')
 dbstop if error
 
-disp('Startup.m loaded succesfully.');
 % set(0,'DefaultTextFontname', 'CMU Serif')
 % set(0,'DefaultAxesFontName', 'CMU Serif')
 

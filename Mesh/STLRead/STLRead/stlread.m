@@ -70,8 +70,8 @@ function [F,V,N] = stlbinary(M)
     end
     
     T = M(85:end);
-    F = NaN(numFaces,3);
-    V = NaN(3*numFaces,3);
+    F = NaN(numFaces,3); 
+    V = NaN(3*numFaces,3); 
     N = NaN(numFaces,3);
     
     numRead = 0;
