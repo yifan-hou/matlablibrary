@@ -2,7 +2,8 @@
 % if range is beyond 1:N, it get wrapped into 1:N.
 % e.g.
 % 	N = 10, then a(-3:4) will return [a(7:10) a(1:4)]
-function samples = circQuery(a, range)
+% if give 'data', then fill the range of a with data, return the filled vector
+function samples = circQuery(a, range, data)
 	N = length(a);
 	id = range < 1;
 	while any(id)
@@ -16,5 +17,11 @@ function samples = circQuery(a, range)
 		id = range > N;
 	end
 
-	samples = a(range);
+	if nargin == 2
+		samples = a(range);
+	else
+		a(range) = data;
+		samples  = a;
+	end
+
 end
