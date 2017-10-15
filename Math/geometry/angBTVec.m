@@ -7,9 +7,9 @@
 % 	nonnegative: if specified, result is in [0 2*pi]
 function ang = angBTVec(x,b,z,nonnegative)
 
+x = x/norm(x);
+b = b/norm(b);
 if nargin <= 2
-	x = x/norm(x);
-	b = b/norm(b);
 	ang = acos(dot(x, b));
 else
 	z = z/norm(z);
