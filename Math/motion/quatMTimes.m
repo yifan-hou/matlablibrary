@@ -15,17 +15,24 @@ function qp = quatMTimes(q1, q2)
 
     N = size(q2, 2);
     if N > 1
-	    cr_v = zeros(3,N);
-	    for i = 1:N
-	        cr_v(:,i) = cross(v1, v2(:,i));
-	    end
-		qp = [s1*s2-v1'*v2; s1*v2+v1*s2 + cr_v];
-	else
-		N    = size(q1, 2);
-		cr_v = zeros(3, N);
-		for i = 1:N
-			cr_v(:,i) = cross(v1(:,i), v2);
-		end
-		qp = [s1*s2 - v2'*v1; v2*s1 + s2*v1 + cr_v];
-	end
+        cr_v = zeros(3,N);
+        for i = 1:N
+            cr_v(:,i) = cross(v1, v2(:,i));
+        end
+        qp = [s1*s2-v1'*v2; s1*v2+v1*s2 + cr_v];
+    else
+        N    = size(q1, 2);
+        cr_v = zeros(3,N);
+        for i = 1:N
+            cr_v(:,i) = cross(v1(:,i), v2);
+        end
+        qp = [s1*s2 - v2'*v1; v2*s1 + s2*v1 + cr_v];
+    end
 end
+
+
+% function c = cross_(a, b)
+%     c =[a(2)*b(3) - a(3)*b(2);
+%         a(3)*b(1) - a(1)*b(3);
+%         a(1)*b(2) - a(2)*b(1)];
+% end

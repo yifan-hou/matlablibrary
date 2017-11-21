@@ -12,6 +12,8 @@ function vr = quatOnVec(v,q)
 		return;
 	end
 	v  = [0; v];
-	vr = quatMTimes(quatMTimes(q, v), quatInv(q));
+	temp1 = quatMTimes(q, v);
+	temp2 = quatInv(q);
+	vr = quatMTimes(temp1, temp2);
 	vr = vr(2:4);
 end
