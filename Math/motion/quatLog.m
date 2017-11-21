@@ -1,20 +1,22 @@
 % Quaternion Logarithm
 % Inputs
-% 	q: 4x1 quaternion.
+% 	q: 4xN quaternion.
 % Outputs
-% 	logq: 4x1 pure quaternion, not necessarily unit
+% 	logq: 4xN pure quaternion, not necessarily unit
 function logq = quatLog(q)
-n = q(2:4);
-s = norm(n); % sin(theta/2)
-c = q(1); % cos(theta/2)
+n = q(2:4,:);
+s = normByCol(n); % sin(theta/2)
+c = q(1,:); % cos(theta/2)
 
+% id of non-zeros
+logq         = zeros(size(q)); % get size
+id_non_zeros = s>1e-6;
+s            = s(id_non_zeros);
+c            = c(id_non_zeros);
+n            = n(id_non_zeros)./(ones(3,1)*s); % normalize
 
-if s < 1e-6
-    logq = [0 0 0 0]';
-else
-    n = n/s;
-    theta_2 = atan2(s,c);
-    logq = [0; theta_2*n];
-end
+theta_2 = atan2(s, c);
+
+logq(2:4, id_non_zeros) = (ones(3,1)*theta_2).*n;
 
 end
