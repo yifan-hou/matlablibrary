@@ -6,6 +6,11 @@
 % Outputs
 % 	qi: 4xN unit quaternions
 function qi = quatSlerp(q0, q1, t)
+	if isempty(t)
+        qi = [];
+		return;
+	end
+	
 	if q0'*q1 < 0
 		% ensure the shortest path is chosen
 		q1 = - q1;
