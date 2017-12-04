@@ -12,7 +12,7 @@
 
 % https://math.stackexchange.com/questions/544946/determine-if-projection-of-3d-point-onto-plane-is-within-a-triangle
 
-function [pprj, in] = projectOntoTri(A, B, C, P);
+function [pprj, in] = projectOntoTri(A, B, C, P)
 N  = size(P,2);
 
 u  = B - A;
