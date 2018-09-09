@@ -12,7 +12,7 @@
 % suitable for use with MATLAB's PATCH graphics object.
 
 % Import an STL mesh, returning a PATCH-compatible face-vertex structure
-fv = stlread('planefrontstay.stl');
+fv = stlread('BIG_SCREW2.stl');
 
 
 %% Render
