@@ -15,6 +15,8 @@ dbstop if error
 % pink   = [197,27,138]/255;
 % grey   = [99,99,99]/255;
 
-% run('/usr0/home/yifanh/library/adigator/startupadigator.m');
+% use local copy of adigator!
+% adigator on win system path has permission issues
+% run('autodiff\adigatorV1.4.1\adigator\startupadigator.m');
 
 disp('Startup.m loaded succesfully.');
