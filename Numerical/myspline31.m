@@ -1,3 +1,5 @@
+% use x1, xd1, xdd1 at t1,
+% and x2 at t2, to compute value at t
 function [x,xd,xdd] = myspline31(t,t1,t2,x1,x2,xd1,xdd1)
 % f(t) = at^3 + bt^2 + ct + d
 % t1, t2 must be scalar

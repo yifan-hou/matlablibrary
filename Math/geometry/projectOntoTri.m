@@ -24,7 +24,7 @@ vv = repmat(v, [1 N]);
 n  = cross(u,v);
 n2 = dot(n,n);
 
-w  = bsxfun(@minus, P, A); % P - A
+w = P - A*ones(1, N);
 
 gamma = cross(uu,w,1)'*n/n2;
 beta  = cross(w,vv,1)'*n/n2;
