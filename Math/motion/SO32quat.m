@@ -1,5 +1,5 @@
 % modified from matlab function rotm2quat
-function quat = mat2quat( R )
+function quat = SO32quat( R )
 %ROTM2QUAT Convert rotation matrix to quaternion
 %   Q = ROTM2QUAT(R) converts a 3D rotation matrix, R, into the corresponding
 %   unit quaternion representation, Q. The input, R, is an 3-by-3-by-N matrix
@@ -19,8 +19,8 @@ function quat = mat2quat( R )
 %      q = rotm2quat(R)
 %
 %   References:
-%   [1] I.Y. Bar-Itzhack, "New method for extracting the quaternion from a 
-%       rotation matrix," Journal of Guidance, Control, and Dynamics, 
+%   [1] I.Y. Bar-Itzhack, "New method for extracting the quaternion from a
+%       rotation matrix," Journal of Guidance, Control, and Dynamics,
 %       vol. 23, no. 6, pp. 1085-1087, 2000
 %
 %   See also quat2rotm
@@ -62,8 +62,8 @@ for i = 1:size(R,3)
     [eigVec,eigVal] = eig(K(:,:,i),'vector');
     [~,maxIdx] = max(real(eigVal));
     quat(i,:) = real([eigVec(4,maxIdx) eigVec(1,maxIdx) eigVec(2,maxIdx) eigVec(3,maxIdx)]);
-    
-    % By convention, always keep scalar quaternion element positive. 
+
+    % By convention, always keep scalar quaternion element positive.
     % Note that this does not change the rotation that is represented
     % by the unit quaternion, since q and -q denote the same rotation.
     if quat(i,1) < 0

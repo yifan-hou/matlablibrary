@@ -1,4 +1,4 @@
-function m = quat2m(q)
+function m = quat2SO3(q)
 	q0 = q(1); q1 = q(2); q2 = q(3); q3 = q(4);
 	q11 = q1*q1;
 	q22 = q2*q2;

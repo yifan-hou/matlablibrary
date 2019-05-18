@@ -2,7 +2,7 @@
 % (Rodriguez's formula)
 %
 % n: 3x1 vector
-function R = exp2m(n)
+function R = so32SO3(n)
 theta  = norm(n);
 if isnumeric(n)
 	if theta > 1e-10

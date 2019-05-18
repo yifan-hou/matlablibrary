@@ -9,7 +9,7 @@ function theta = rot2plane(v, n, x)
 	v = v/norm(v);
 	n = n/norm(n);
 	x = x/norm(x);
-	N = crossMat(n);
+	N = wedge(n);
 
 	% acos + bsin + c = 0
 	a = -N*N*v; 
