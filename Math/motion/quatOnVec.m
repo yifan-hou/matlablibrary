@@ -7,7 +7,7 @@
 function vr = quatOnVec(v,q)
 	if size(v,2) > 1
 		% use rotation matrix
-		m = quat2m(q);
+		m = quat2SO3(q);
 		vr = m*v;
 		return;
 	end
