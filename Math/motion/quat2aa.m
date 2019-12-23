@@ -8,6 +8,6 @@ function [theta, n] = quat2aa(q)
 	theta = 2*acos(q(1,:));
 	qv = q(2:4,:);
 	qvnorm = ones(3,1)*normByCol(qv);
-    n = qv./qvnorm; % to be compatible with symbolic
+    n = qv./qvnorm; % to be compatible with symbolic. Matlab handles the 0/0 situation
 % 	n = bsxfun(@rdivide, qv, qvnorm);
 end
