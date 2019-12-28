@@ -48,7 +48,6 @@ end
 % remove redundancy
 % only work if kDim = 3
 assert(kDim == 3);
-R = normc(R);
 
 TOL = 1e-6;
 r = rank(R, TOL);
@@ -57,15 +56,13 @@ if r == 0
     return;
 end
 
-% remove zeros
+% remove zeros, then normalize
 Rnorm = normByCol(R);
 R(:, Rnorm < TOL) = [];
+R = normc(R);
+R = uniquetol(R', 10*TOL, 'ByRows', true)';
 
 if r == 1
-    if size(R, 2) == 1
-        return;
-    end
-    R = uniquetol(R', 10*TOL, 'ByRows', true)';
     return;
 end
 
