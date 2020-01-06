@@ -51,10 +51,10 @@ if r == 2
         origin_id = find(K_ == 1);
         left_id = wrapN(origin_id+1, length(K_));
         right_id = wrapN(origin_id-1, length(K_));
-        id_unique = [left_id, right_id];
-        if norm(R_polytope_(:, left_id) + R_polytope_(:, right_id)) < 1e-6
+        id_unique = [K_(left_id), K_(right_id)];
+        if norm(R_polytope_(:, K_(left_id)) + R_polytope_(:, K_(right_id))) < 1e-6
             % half plane
-            id_others = setdiff(K_, [origin_id id_unique]);
+            id_others = setdiff(K_, [K_(origin_id) id_unique]);
             id_unique = [id_unique id_others(1)];
         end
         R = R_polytope(:, id_unique);
@@ -141,19 +141,19 @@ if any(any(id1_))
         id_rest = setdiff(1:size(R,2), id_antipodal);
         R_proj_xy = [x'; y'] * R(:, id_rest);
         R_proj_xy = normc(R_proj_xy);
-        [~, max_id] = max(R_proj_xy(1, :));
-        [~, min_id] = min(R_proj_xy(1, :));
-        R_ = R(:, [id_antipodal id_rest(max_id) id_rest(min_id)]);
-        if rank(R_) < 3
+        R_proj_angles = panAngle(R_proj_xy);
+        [~, max_id] = max(R_proj_angles);
+        [~, min_id] = min(R_proj_angles);
+        if abs(R_proj_angles(max_id) - pi) < 1e-6
             % facet
-            x_ = R(:, id_antipodal(1));
+            x_ = z;
             xx_ = R(:, id_rest(max_id));
             z_ = cross(x_, xx_);
             y_ = cross(z_, x_);
             R = [x_, y_, -x_-y_, y];
         else
             % edge
-            R = R_;
+            R = R(:, [id_antipodal id_rest(max_id) id_rest(min_id)]);
         end
     elseif num_anitpodal == 2
         % origin is on a facet
@@ -190,4 +190,30 @@ function ids = antiPodals(R)
         end
         id_all(1) = [];
     end
+end
+
+
+%!
+%! Find order of 2D vectors within a half plane. Compute rotation angles in
+%! (0 ~ pi) degree
+%!
+%! @param      v     2xn vectors
+%!
+%! @return     1xn angles in rad
+%!
+function angles = panAngle(v)
+    angles_raw = atan2(v(2,:), v(1,:));
+    angles_raw(angles_raw < 0) = angles_raw(angles_raw < 0) + 2*pi; % 0~ 2pi
+
+    % now try to find one extreme vector (one edge of the cone)
+    for i = 1:length(angles_raw)
+        angles = angles_raw - (angles_raw(i));
+        angles(angles < 0) = angles(angles < 0) + 2*pi; % 0~ 2pi
+
+        if max(angles) < pi + 1e-7
+            return;
+        end
+    end
+    % shouldn't arrive here
+    assert(false);
 end
