@@ -21,7 +21,7 @@ if r == 2
     if size(R, 2) == 2
         return;
     end
-    center = mean(R')';
+    center = mean(R, 2);
     if norm(center) < 1e-6
         % whole plane
         x = R(:, 1);
@@ -75,7 +75,7 @@ if size(R, 2) == 3
     return;
 end
 
-center = mean(R')';
+center = mean(R, 2);
 if norm(center) < 1e-6
     % whole space
     R = [eye(3), -ones(3, 1)];
@@ -103,7 +103,7 @@ if any(any(id1_))
     if num_anitpodal == 0
         % origin is a vertex or on a facet
         R_ = R_polytope_(:, id_unique);
-        if rank(R_) < 3
+        if rank(R_, TOL) < 3
             % facet
             x = R_(:, 1);
             z = cross(x, R_(:, 2));

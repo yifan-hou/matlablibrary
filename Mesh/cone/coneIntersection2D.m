@@ -10,7 +10,12 @@ R2 = normc(R2);
 
 TOL = 1e-5;
 
-xx = mean(R1')';
+xx = mean(R1, 2);
+
+% I haven't consider the case of line
+assert(norm(xx) > 1e-4);
+assert(norm(mean(R2, 2)) > 1e-4);
+
 zz = cross([xx; 0], [1; 0; 0]);
 if norm(zz) < TOL
     zz = cross([xx; 0], [0; 1; 0]);
