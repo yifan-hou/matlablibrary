@@ -7,7 +7,7 @@ else
     data = W';
 end
 
-if rank(W) >= 3
+if rank(bsxfun(@minus, W, W(:,1))) >= 3
     K = convhull(data(:,1), data(:,2), data(:,3));
     h = trisurf(K, data(:,1), data(:,2), data(:,3), 'Facecolor',color);
 else
