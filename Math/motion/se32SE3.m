@@ -1,3 +1,5 @@
+% Exponential map from se3 to SE3.
+% twist = [v, w], 6x1 vector
 function SE3 = se32SE3(twist)
     SE3 = eye(4);
     v = twist(1:3);
@@ -7,7 +9,7 @@ function SE3 = se32SE3(twist)
         % no rotation
         SE3(1:3, 4) = v;
     else
-        R = so32SO3(w)
+        R = so32SO3(w);
         v = v/theta;
         w = w/theta;
         SE3(1:3, 1:3) = R;
