@@ -1,5 +1,4 @@
-% a, b must be vectors of length 2
+% a, b must be 2 x n matrices
 function c = cross2(a,b)
-
-c = [0; 0; a(1).*b(2)-a(2).*b(1)];
+    c = a(1,:).*b(2,:) - a(2,:).*b(1,:);
 end
